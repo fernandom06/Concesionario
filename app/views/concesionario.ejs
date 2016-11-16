@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+
+<% include header %>
+
+
+<body>
+
+<div>
+<script>
+img = new Array(); 
+img.push('https://images-eds-ssl.xboxlive.com/image?url=8Oaj9Ryq1G1_p3lLnXlsaZgGzAie6Mnu24_PawYuDYIoH77pJ.X5Z.MqQPibUVTcvcAq1_hOmZw29FfqjTSusPdJ1xCzR6Bldu9MUwLAecOfrrTveMwT8F5gHhw8eAvt2ZnTdCagP74urydeplXFhAwTwtofpQwcnRpX3hA7ms9j9DmLNfSqKAOB24xmUW9BBTRv0tYoB0iatvu3L5HcDO7r.0bs9C5lZaKYwhAjXsg-&format=jpg'); 
+img.push('http://digitalspyuk.cdnds.net/13/47/1600x800/landscape_gaming-foraza-motorsport-5-screenshot-3.jpg'); 
+img.push('http://digitalspyuk.cdnds.net/12/17/1600x800/landscape_2012_hennessey_venom_gt_4.jpg');
+img.push('https://i.ytimg.com/vi/-Tnbfw8a87E/maxresdefault.jpg');
+img.push('http://roa.h-cdn.co/assets/16/14/1600x800/landscape-1460307384-mc12-lead-2-press.jpg');
+img.push('http://digitalspyuk.cdnds.net/16/20/1600x800/landscape-1463559129-nascar.jpg');
+
+index = 0; 
+function altBg(){ 
+document.body.style.backgroundImage = 'url(' + img[index % img.length] + ')'; 
+index++; 
+} 
+window.onload = function(){ 
+setInterval('altBg()', 8000);  
+};  
+</script>
+</div>
+
+<div align=center><h1>Concesionario de ocasión</h1></div><br><br><br><br><br><br><br>
+
+<div class="table-responsive"><table style="width:40%" align="center" class="table table-hover">
+	<tr class="warning">
+		<th>ID</th>
+		<th>Marca</th>
+		<th>Modelo</th>
+		<th>Caballos</th>
+		<th>Color</th>
+		<th>Borrado</th>
+	
+	</tr>
+		
+
+<% for(var i=0; i<coches.length; i++) { %>
+
+	<% if(coches[i] ) { %>
+  <tr>
+  
+					<%if (coches[i].Caballos<200) {%><tr class="success"><%}%>
+					<%if (coches[i].Caballos>=200 && coches[i].Caballos<400) {%><tr class="info"><%}%>
+					<%if (coches[i].Caballos>=400) {%><tr class="danger"><%}%>
+						
+						
+		                <td><a href= "coches/<%= coches[i]._id %>"><%=coches[i]._id %></a></td>
+						<td><%=coches[i].Marca %></td>
+						<td><%=coches[i].Modelo %></td>
+						<td><%=coches[i].Caballos %></td>
+						<td><%=coches[i].Color %></td>
+
+						<td><form method ="post" action="coches/<%= coches[i]._id %>?_method=delete">
+							<input type="submit" value="borrar" class="danger"></td>
+</form>
+  </tr>
+  
+<% } %>
+<% } %>
+
+
+
+
+</table></div>
+
+
+
+<form method ="post" action="/coches" enctype="application/x-www-form-urlencoded">
+  Marca<br>
+  <input type="text" name="Marca"><br>
+  Modelo<br>
+  <input type="text" name="Modelo"><br>
+  Caballos<br>
+  <input type="number" name="Caballos"><br>
+  Color<br>
+  <input type="text" name="Color"><br><br>
+		
+
+  <input type="submit" value="Submit"><br>
+</form>  
+	
+
+</body>
+</html>
